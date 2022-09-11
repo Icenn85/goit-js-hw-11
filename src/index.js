@@ -11,7 +11,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 let query = '';
 let page = 1;
 const perPage = 40;
-let simpleLightBox;
+let simLightBox = new SimpleLightbox('.gallery a');
 
 function imageMarkup(images) {
   const markup = images
@@ -81,7 +81,7 @@ function onSearchForm(evt) {
          );
       } else {
         imageMarkup(data.hits);
-        simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+        simLightBox.refresh();
         Notify.success(`Hooray! We found ${data.totalHits} images.`);
 
         if (data.totalHits > perPage) {
@@ -97,12 +97,12 @@ function onSearchForm(evt) {
 
 function onLoadMoreBtn() {
   page += 1;
-  simpleLightBox.destroy();
+  simLightBox.destroy();
 
   fetchImg(query, page, perPage)
     .then(({ data }) => {
       imageMarkup(data.hits);
-      simpleLightBox = new SimpleLightbox('.gallery a').refresh();
+      simLightBox.refresh();
 
       const totalPages = data.totalHits / perPage;
 
