@@ -97,7 +97,6 @@ function onSearchForm(evt) {
 
 function onLoadMoreBtn() {
   page += 1;
-  simLightBox.destroy();
 
   fetchImg(query, page, perPage)
     .then(({ data }) => {
